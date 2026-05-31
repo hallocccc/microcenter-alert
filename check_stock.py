@@ -29,9 +29,9 @@ def send_email(product_name):
     msg = MIMEMultipart()
     msg['From'] = email_user
     msg['To'] = email_user
-    msg['Subject'] = f'Micro Center: {product_name} is Now In Stock!'
+    msg['Subject'] = f'{product_name} is Now In Stock!'
     msg.attach(MIMEText(
-        f'{product_name} is in stock at Micro Center Tustin.\n\nGet it before it sells out!',
+        f'{product_name} is now in stock.\n\nGet it before it sells out!',
         'plain'
     ))
 
