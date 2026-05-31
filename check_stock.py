@@ -22,7 +22,7 @@ def check_stock(url):
     response = session.get(url, headers=HEADERS, timeout=15)
     return "'inStock':'True'" in response.text
 
-def send_email(product_name):
+def send_email(product_name, url):
     email_user = os.environ["EMAIL"]
     email_password = os.environ["PASSWORD"]
 
@@ -31,7 +31,7 @@ def send_email(product_name):
     msg['To'] = email_user
     msg['Subject'] = f'{product_name} is Now In Stock!'
     msg.attach(MIMEText(
-        f'{product_name} is now in stock.\n\nGet it before it sells out!',
+        f'{product_name} is now in stock.\n\n{url}\n\nGet it before it sells out!',
         'plain'
     ))
 
@@ -47,7 +47,7 @@ for name, url in PRODUCTS.items():
     try:
         if check_stock(url):
             print(f"IN STOCK: {name}")
-            send_email(name)
+            send_email(name, url)
         else:
             print(f"Out of stock: {name}")
     except Exception as e:
