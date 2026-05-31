@@ -2,7 +2,9 @@ name: Micro Center Stock Alert
 
 on:
   schedule:
-    - cron: '*/10 * * * *'
+    - cron: '*/5 12-23 * * *'   # every 5 min, 5am-5pm PDT (UTC-7)
+    - cron: '*/5 0-5 * * *'     # every 5 min, 5pm-11pm PDT
+    - cron: '*/15 6-11 * * *'   # every 15 min, 11pm-5am PDT (nighttime)
   workflow_dispatch:
 
 env:
