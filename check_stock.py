@@ -42,11 +42,13 @@ def send_email(product_name, url):
 
     print(f"Alert sent for {product_name}!")
 
+test_mode = os.environ.get("TEST_EMAIL", "false").lower() == "true"
+
 any_error = False
 for name, url in PRODUCTS.items():
     try:
-        if check_stock(url):
-            print(f"IN STOCK: {name}")
+        if test_mode or check_stock(url):
+            print(f"IN STOCK: {name}" if not test_mode else f"TEST: {name}")
             send_email(name, url)
         else:
             print(f"Out of stock: {name}")

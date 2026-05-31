@@ -6,6 +6,11 @@ on:
     - cron: '*/5 0-5 * * *'
     - cron: '*/15 6-11 * * *'
   workflow_dispatch:
+    inputs:
+      test_email:
+        description: 'Send test email regardless of stock status'
+        required: false
+        default: 'false'
 
 env:
   FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
@@ -23,3 +28,4 @@ jobs:
         env:
           EMAIL: ${{ secrets.EMAIL }}
           PASSWORD: ${{ secrets.PASSWORD }}
+          TEST_EMAIL: ${{ github.event.inputs.test_email }}
